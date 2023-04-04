@@ -21,4 +21,8 @@ public class AuthUtil {
     public static Set<String> getPerms() {
         return getLoginUser().getPerms();
     }
+
+    public static Long getShopId() {
+        return getLoginUser().getShopId();
+    }
 }

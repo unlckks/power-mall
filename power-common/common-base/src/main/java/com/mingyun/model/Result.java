@@ -46,5 +46,18 @@ public class Result<T> {
         result.setMsg(businessEnum.getDesc());
         return result;
     }
+    public static <T> Result<T> fail(Integer code, String msg) {
+        Result<T> result = new Result<>();
+        result.setCode(code);
+        result.setMsg(msg);
+        return result;
+    }
+
+    public static Result<String> handle(boolean flag) {
+        if (flag) {
+            return success(null);
+        }
+        return fail(BusinessEnum.OPERATION_FAIL);
+    }
 
 }
