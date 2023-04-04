@@ -32,8 +32,8 @@ import java.time.Duration;
 import java.util.UUID;
 
 /**
- * @author: 动力节点·武汉
- * 时间: 2023-04-01 11:37
+ * @Author: MingYun
+ * @Date: 2023-04-01 20:04
  */
 @Configuration
 @Slf4j

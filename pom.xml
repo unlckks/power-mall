@@ -33,6 +33,7 @@
         <swagger-ui.version>3.0.0</swagger-ui.version>
         <common-base.version>1.0.0</common-base.version>
         <common-business.version>1.0.0</common-business.version>
+        <qiniu.version>[7.7.0, 7.10.99]</qiniu.version>
     </properties>
 
     <dependencies>
@@ -97,6 +98,12 @@
                 <groupId>com.powernode</groupId>
                 <artifactId>common-base</artifactId>
                 <version>${common-base.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qiniu</groupId>
+                <artifactId>qiniu-java-sdk</artifactId>
+                <version>${qiniu.version}</version>
             </dependency>
 
         </dependencies>

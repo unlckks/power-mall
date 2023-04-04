@@ -8,16 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import java.io.Serializable;
-import java.util.Date;
+
 
 /**
- * @author: 动力节点·武汉
- * 时间: 2023-04-01 15:39
- */
-
-/**
- * 系统用户
+ * @Author: MingYun
+ * @Date: 2023-04-01 20:04
  */
 @Data
 @AllArgsConstructor
