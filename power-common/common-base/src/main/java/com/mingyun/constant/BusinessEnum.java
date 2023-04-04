@@ -8,7 +8,8 @@ public enum BusinessEnum {
 
     UN_AUTHORIZATION(401, "未授权"),
     OPERATION_FAIL(-1, "操作失败"),
-    ACCESS_DENY_FAIL(-1, "权限不足，请联系管理员");
+    ACCESS_DENY_FAIL(-1, "权限不足，请联系管理员"),
+    SERVER_INNER_ERROR(-1, "服务器出小差了");
 
     private Integer code;
     private String desc;
