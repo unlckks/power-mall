@@ -25,7 +25,7 @@ import java.util.Date;
 @Slf4j
 public class MyLogAspect {
     // 切点
-    public static final String POINT_CUT = "execution *(com.mingyun.controller.*.*(..))";
+    public static final String POINT_CUT = "execution (* com.mingyun.controller.*.*(..))";
 
     // 通知
     @Around(value = POINT_CUT)

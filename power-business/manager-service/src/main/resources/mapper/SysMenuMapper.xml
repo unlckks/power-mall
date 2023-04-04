@@ -17,4 +17,10 @@
     <!--@mbg.generated-->
     menu_id, parent_id, `name`, url, perms, `type`, icon, order_num
   </sql>
+
+  <select id="selectMenusByUserId" resultMap="BaseResultMap">
+    SELECT t1.* FROM `sys_menu` as t1 join sys_role_menu as t2 on(t1.menu_id=t2.menu_id) join sys_user_role as t3 on(t2.role_id = t3.role_id)
+    where t3.user_id = #{value} and t1.type in(0,1)
+    ORDER BY t1.parent_id,t1.menu_id
+    </select>
 </mapper>

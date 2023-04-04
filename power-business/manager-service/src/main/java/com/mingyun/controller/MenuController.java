@@ -1,10 +1,9 @@
 package com.mingyun.controller;
 
 import com.mingyun.domain.SysMenu;
-import com.mingyun.mapper.SysMenuMapper;
 import com.mingyun.model.Result;
 import com.mingyun.service.SysMenuService;
-import com.mingyun.util.AuthUtil;
+import com.mingyun.utils.AuthUtil;
 import com.mingyun.vo.MenuPermsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,14 +31,15 @@ public class MenuController {
      * 查菜单数据
      * 树形结构 后端来做
      * 拿权限集合
+     *
      * @return
      */
     @GetMapping("nav")
     @ApiOperation("加载当前用户的菜单和权限集合")
-    public Result<MenuPermsVO> loadMenuAndPerms(){
+    public Result<MenuPermsVO> loadMenuAndPerms() {
         Long userId = AuthUtil.getUserId();
         //进行查菜单
-        List<SysMenu> sysMenus =   sysMenuService.findUserMenus(userId);
+        List<SysMenu> sysMenus = sysMenuService.findUserMenus(userId);
         Set<String> perms = AuthUtil.getPerms();
         MenuPermsVO menuPermsVO = new MenuPermsVO(sysMenus, perms);
         return Result.success(menuPermsVO);

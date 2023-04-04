@@ -1,4 +1,4 @@
-package com.mingyun.util;
+package com.mingyun.utils;
 
 import com.mingyun.model.SecurityUser;
 import org.springframework.security.core.context.SecurityContextHolder;
