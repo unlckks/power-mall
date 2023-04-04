@@ -18,11 +18,12 @@ public class AuthUtil {
         return getLoginUser().getUserId();
     }
 
+    public static Long getShopId() {
+        return getLoginUser().getShopId();
+    }
+
     public static Set<String> getPerms() {
         return getLoginUser().getPerms();
     }
 
-    public static Long getShopId() {
-        return getLoginUser().getShopId();
-    }
 }

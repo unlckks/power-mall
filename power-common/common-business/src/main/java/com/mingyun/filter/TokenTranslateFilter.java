@@ -2,26 +2,28 @@ package com.mingyun.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.mingyun.constant.AuthConstant;
+
 import com.mingyun.model.SecurityUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
 
 /**
  * @Author: MingYun
@@ -40,7 +42,7 @@ public class TokenTranslateFilter extends OncePerRequestFilter {
      * 如果框架没有放行这个api 走框架的authenticationEntryPoint 返回401
      * 1.拿token值
      * 2.做转换
-     * 3.放在security的context中去 （@PreAuthority('')）
+     * 3.放在security的context中去
      *
      * @param request
      * @param response

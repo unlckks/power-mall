@@ -4,19 +4,21 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
- *  @Author: MingYun
- *  @Date: 2023-04-01 20:44
+ * @author: 动力节点·武汉
+ * 时间: 2023-04-01 15:39
  */
+
 /**
-    * 系统用户
-    */
+ * 系统用户
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,5 +50,6 @@ public class LoginSysUser implements Serializable {
      */
     @TableField(value = "shop_id")
     private Long shopId;
+
 
 }

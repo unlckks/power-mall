@@ -38,9 +38,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Cacheable(key = "#userId")
     public List<SysMenu> findUserMenus(Long userId) {
         List<SysMenu> sysMenus = sysMenuMapper.selectMenusByUserId(userId);
-        if (!CollectionUtils.isEmpty(sysMenus)){
-            //进行转树形结构
-            sysMenus = translateMenuTree(sysMenus ,0L);
+        if (!CollectionUtils.isEmpty(sysMenus)) {
+            // 转成树形结构
+            sysMenus = translateMenuTree(sysMenus, 0L);
         }
         return sysMenus;
     }

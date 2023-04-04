@@ -1,7 +1,5 @@
 package com.mingyun.config;
 
-
-
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mingyun.constant.AuthConstant;
@@ -13,7 +11,7 @@ import com.mingyun.service.impl.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -33,10 +31,9 @@ import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.UUID;
 
-
 /**
- * @Author: MingYun
- * @Date: 2023-04-01 19:31
+ * @author: 动力节点·武汉
+ * 时间: 2023-04-01 11:37
  */
 @Configuration
 @Slf4j
@@ -44,12 +41,13 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     private UserDetailsServiceImpl userDetailsService;
-    //todo,修改
+
     @Resource
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 自定义的认证流程
+     * 告诉框架 走我们自己的登录逻辑
      *
      * @param auth
      * @throws Exception
@@ -61,6 +59,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 网络请求的配置
+     *
      * @param http
      * @throws Exception
      */
@@ -88,6 +87,11 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 登录成功的处理器
+     * 生成一个token
+     * 当前的认证对象
+     * 存入redis
+     * 返回token
+     *
      * @return
      */
     @Bean
@@ -96,8 +100,9 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
             response.setContentType(HttpConstant.APPLICATION_JSON);
             response.setCharacterEncoding(HttpConstant.UTF_8);
             String token = UUID.randomUUID().toString();
+            // authentication.getPrincipal() 就是securityUser
             String userStr = JSON.toJSONString(authentication.getPrincipal());
-            redisTemplate.opsForValue().set(AuthConstant.LOGIN_TOKEN_PREFIX + token, userStr, Duration.ofSeconds(AuthConstant.TOKEN_TIME));
+            stringRedisTemplate.opsForValue().set(AuthConstant.LOGIN_TOKEN_PREFIX + token, userStr, Duration.ofSeconds(AuthConstant.TOKEN_TIME));
             LoginResult loginResult = new LoginResult(token, AuthConstant.TOKEN_TIME);
             Result<LoginResult> result = Result.success(loginResult);
             ObjectMapper objectMapper = new ObjectMapper();
@@ -111,6 +116,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 登录失败的处理器
+     *
      * @return
      */
     @Bean
@@ -143,6 +149,8 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 登出的处理器
+     * redis删除
+     *
      * @return
      */
     @Bean
@@ -152,7 +160,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
             response.setCharacterEncoding(HttpConstant.UTF_8);
             String authorization = request.getHeader(AuthConstant.AUTHORIZATION);
             String token = authorization.replaceFirst(AuthConstant.BEARER, "");
-            redisTemplate.delete(AuthConstant.LOGIN_TOKEN_PREFIX + token);
+            stringRedisTemplate.delete(AuthConstant.LOGIN_TOKEN_PREFIX + token);
             Result<Object> result = Result.success(null);
             ObjectMapper objectMapper = new ObjectMapper();
             String s = objectMapper.writeValueAsString(result);

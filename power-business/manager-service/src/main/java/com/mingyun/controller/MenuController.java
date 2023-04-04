@@ -38,7 +38,7 @@ public class MenuController {
     @ApiOperation("加载当前用户的菜单和权限集合")
     public Result<MenuPermsVO> loadMenuAndPerms() {
         Long userId = AuthUtil.getUserId();
-        //进行查菜单
+        // 查菜单
         List<SysMenu> sysMenus = sysMenuService.findUserMenus(userId);
         Set<String> perms = AuthUtil.getPerms();
         MenuPermsVO menuPermsVO = new MenuPermsVO(sysMenus, perms);

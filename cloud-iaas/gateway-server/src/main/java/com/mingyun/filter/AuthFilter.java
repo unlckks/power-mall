@@ -14,6 +14,7 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -34,10 +35,10 @@ public class AuthFilter implements GlobalFilter , Ordered {
     private WhiteUrlsConfig whiteUrlsConfig ;
 
     @Autowired
-    private RedisTemplate redisTemplate ;
+    private StringRedisTemplate StringRedisTemplate ;
 
     /**
-     *与前端约定 token携带在header中 Authorization:bearer
+     *
      *1.先拿到请求的路经
      * 2.判断放行
      * 3.取token
@@ -58,7 +59,7 @@ public class AuthFilter implements GlobalFilter , Ordered {
         if (StringUtils.hasText(authorization)){
             //进行分割
             String token =authorization.replaceFirst(AuthConstant.BEARER,"");
-            if (StringUtils.hasText(token) && redisTemplate.hasKey(AuthConstant.LOGIN_TOKEN_PREFIX+token)){
+            if (StringUtils.hasText(token) && StringRedisTemplate.hasKey(AuthConstant.LOGIN_TOKEN_PREFIX+token)){
                 return  chain.filter(exchange);
             }
         }
