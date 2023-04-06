@@ -18,6 +18,8 @@ import java.util.List;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandle {
+
+
     /**
      *  业务异常
      */
@@ -34,6 +36,7 @@ public class GlobalExceptionHandle {
         log.error("-----------runtimeEx",e);
         return Result.fail(BusinessEnum.SERVER_INNER_ERROR);
     }
+
     /**
      * 方法参数无效异常
      */

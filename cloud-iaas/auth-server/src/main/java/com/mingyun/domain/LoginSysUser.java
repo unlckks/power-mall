@@ -21,6 +21,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @TableName(value = "sys_user")
 public class LoginSysUser implements Serializable {
+
     @TableId(value = "user_id", type = IdType.AUTO)
     private Long userId;
 

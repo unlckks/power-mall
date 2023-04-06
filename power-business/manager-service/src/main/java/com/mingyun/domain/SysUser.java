@@ -62,7 +62,7 @@ public class SysUser implements Serializable {
      */
     @TableField(value = "`status`")
     @ApiModelProperty(value="状态  0：禁用   1：正常")
-    private Byte status;
+    private Integer status;
 
     /**
      * 创建者ID

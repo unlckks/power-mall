@@ -6,7 +6,7 @@ package com.mingyun.constant;
  */
 public interface HttpConstant {
 
-    String CONTENT_TYPE = "content_type";
+    String CONTENT_TYPE = "content-type";
 
     String APPLICATION_JSON = "application/json;charset=utf-8";
 
