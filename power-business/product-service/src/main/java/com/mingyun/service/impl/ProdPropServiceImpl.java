@@ -3,37 +3,37 @@ package com.mingyun.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mingyun.domain.ProdProp;
 import com.mingyun.domain.ProdPropValue;
 import com.mingyun.dto.PropAddDTO;
 import com.mingyun.dto.PropQueryDTO;
 import com.mingyun.ex.BusinessException;
+import com.mingyun.mapper.ProdPropMapper;
 import com.mingyun.mapper.ProdPropValueMapper;
+import com.mingyun.service.ProdPropService;
 import com.mingyun.utils.AuthUtil;
 import com.mingyun.vo.ProdPropVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mingyun.mapper.ProdPropMapper;
-import com.mingyun.domain.ProdProp;
-import com.mingyun.service.ProdPropService;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 /**
  * @Author: MingYun
  * @Date: 2023-04-06 09:44
  */
 @Service
+@CacheConfig(cacheNames = "com.mingyun.service.impl.ProdPropServiceImpl")
 public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp> implements ProdPropService {
 
     @Autowired
@@ -111,6 +111,20 @@ public class ProdPropServiceImpl extends ServiceImpl<ProdPropMapper, ProdProp> i
             });
         }
         return insert;
+    }
+
+    @Override
+    @Cacheable(key = "#shopId")
+    public List<ProdProp> loadProdProps(Long shopId) {
+        return prodPropMapper.selectList(new LambdaQueryWrapper<ProdProp>()
+                .eq(ProdProp::getShopId, shopId));
+    }
+
+    @Override
+    public List<ProdPropValue> loadPropValues(Long propId) {
+        return prodPropValueMapper.selectList(new LambdaQueryWrapper<ProdPropValue>()
+                .eq(ProdPropValue::getPropId, propId)
+        );
     }
 
 }

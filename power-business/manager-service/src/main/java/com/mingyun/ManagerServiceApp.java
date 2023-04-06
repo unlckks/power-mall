@@ -12,7 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableCaching
-public class ManagerServiceApp {
+public class     ManagerServiceApp {
     public static void main(String[] args) {
         SpringApplication.run(ManagerServiceApp.class,args);
     }

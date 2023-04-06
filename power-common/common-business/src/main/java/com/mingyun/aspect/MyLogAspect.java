@@ -1,6 +1,7 @@
 package com.mingyun.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,6 +11,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +56,12 @@ public class MyLogAspect {
         result = joinPoint.proceed(args);
         long end = System.currentTimeMillis();
         long spendTime = end - start;
+        String finalArgs = null;
+        if (!ObjectUtils.isEmpty(args) && args[0] instanceof MultipartFile) {
+            finalArgs = "file";
+        } else {
+            finalArgs = JSON.toJSONString(args);
+        }
         log.info("调用时间:{},路径为:{},ip为:{},方法为:{},执耗时为:{},描述:{},参数为:{},结果为:{}",
                 new Date(),
                 api,
@@ -61,7 +69,7 @@ public class MyLogAspect {
                 typeName + "." + methodName,
                 spendTime,
                 desc,
-                JSON.toJSONString(args),
+                finalArgs,
                 JSON.toJSONString(result)
         );
         return result;

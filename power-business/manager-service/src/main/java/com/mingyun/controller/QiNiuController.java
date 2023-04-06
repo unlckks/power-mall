@@ -37,8 +37,6 @@ public class QiNiuController {
     @PostMapping("upload/element")
     @ApiOperation("文件上传")
     public Result<String> uploadFile(MultipartFile file) {
-
-
         //构造一个带指定 Region 对象的配置类
         Configuration cfg = new Configuration(Region.huanan());
         //...其他参数参考类注释
@@ -46,7 +44,7 @@ public class QiNiuController {
         //...生成上传凭证，然后准备上传
         String accessKey = "hBq0ted84yBcAmM7aBcXjosfZtPL2KgswF6Ft5pA";
         String secretKey = "irWmZnsE0ASi2gPKhXyOmCj8JaBdkSroB8EgSi5Q";
-        String bucket = "mall";
+        String bucket = "23-mall";
         //默认不指定key的情况下，以文件内容的hash值作为文件名
         String key = null;
         Auth auth = Auth.create(accessKey, secretKey);
@@ -61,22 +59,6 @@ public class QiNiuController {
         } catch (Exception ex) {
             return Result.fail(BusinessEnum.SERVER_INNER_ERROR);
         }
-
-/*
-
-        //构造一个带指定 Region 对象的配置类
-       qiniuConfig.setRegion(Region.huanan());
-        //...其他参数参考类注释
-        qiniuConfig.uploadManager(cfg);
-        String key = null;
-        Auth auth = Auth.create(qiniuConfig.getAccessKey(), qiniuConfig.getSecretKey());
-        String upToken = auth.uploadToken(qiniuConfig.bucketManager().getBucketInfo());
-        StringMap stringMap = new StringMap();
-        stringMap.put("x-qn-meta-tag", "1.0");
-        qiniuConfig.uploadManager(file,stringMap);
-*/
-
-
 
     }
  

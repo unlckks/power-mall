@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
 import com.mingyun.constant.ProdTagConstant;
 import com.mingyun.dto.ProdTagQueryDTO;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ import org.springframework.util.StringUtils;
  *  @Date: 2023-04-06 09:44
  */
 @Service
+@CacheConfig(cacheNames = "com.mingyun.service.impl.PageTagServiceImpl")
 public class ProdTagServiceImpl extends ServiceImpl<ProdTagMapper, ProdTag> implements ProdTagService{
 
 
