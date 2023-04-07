@@ -2,7 +2,6 @@ package com.mingyun.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
-import com.mingyun.domain.Prod;
 import com.mingyun.dto.ProdAddDTO;
 import com.mingyun.dto.ProdQueryDTO;
 import com.mingyun.model.Result;

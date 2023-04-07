@@ -47,6 +47,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         );
     }
 
+    /**
+     * 查询可用的父分离列表
+     * @return
+     */
     @Override
     @Cacheable(key = CategoryConstant.CATEGORY_PARENT_LIST)
     public List<Category> loadParentCategorys() {

@@ -1,8 +1,5 @@
 package com.mingyun.dto;
 
-import com.mingyun.domain.Prod;
-import com.mingyun.domain.Sku;
-import com.mingyun.domain.Prod;
 import com.mingyun.domain.Sku;
 import com.mingyun.model.DeliveryMode;
 import io.swagger.annotations.ApiModel;
@@ -10,7 +7,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.jms.JmsProperties;
 
 import java.util.List;
 

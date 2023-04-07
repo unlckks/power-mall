@@ -17,10 +17,17 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.mingyun</groupId>
-            <artifactId>common-business</artifactId>
+            <artifactId>es-common</artifactId>
+            <version>1.0.0</version>
         </dependency>
+
+       <!-- <dependency>
+            <groupId>com.mingyun</groupId>
+            <artifactId>common-business</artifactId>
+        </dependency>-->
 
         <dependency>
             <groupId>mysql</groupId>

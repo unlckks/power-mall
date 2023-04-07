@@ -14,23 +14,19 @@ import com.mingyun.mapper.SkuMapper;
 import com.mingyun.model.DeliveryMode;
 import com.mingyun.utils.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.swing.plaf.SliderUI;
 import java.util.Date;
 import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mingyun.mapper.ProdMapper;
-import com.mingyun.domain.Prod;
 import com.mingyun.service.ProdService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
-import springfox.documentation.spring.web.json.Json;
 
 /**
  * @Author: MingYun

@@ -1,8 +1,11 @@
 package com.mingyun.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.mingyun.domain.Prod;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  *  @Author: MingYun
@@ -10,4 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ProdMapper extends BaseMapper<Prod> {
+
+    List<Prod> selectMyPage(@Param("offset") int offset, @Param("size") int size, @Param("t") Date t1);
 }
