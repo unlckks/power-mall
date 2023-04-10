@@ -17,6 +17,7 @@
         <module>es-common</module>
         <module>search-service</module>
         <module>store-service</module>
+        <module>member-service</module>
     </modules>
 
     <properties>

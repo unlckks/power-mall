@@ -1,5 +1,6 @@
 package com.mingyun.dto;
 
+import com.mingyun.domain.Prod;
 import com.mingyun.domain.Sku;
 import com.mingyun.model.DeliveryMode;
 import io.swagger.annotations.ApiModel;
@@ -10,6 +11,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * @Author: MingYun
+ * @Date: 2023-04-06 19:56
+ */
 /**
  * @Author: MingYun
  * @Date: 2023-04-06 19:56

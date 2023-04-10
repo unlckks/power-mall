@@ -27,6 +27,10 @@ public class SecurityUser implements UserDetails {
     private Long shopId;
     private String loginType;
     private Set<String> perms = new HashSet<>();
+
+    // 前台会员的属性还没添加
+    private String openId;
+
     /**
      * 在分布式结构中
      * 授权和解析 是可以分开的
@@ -42,6 +46,8 @@ public class SecurityUser implements UserDetails {
 
     /**
      * 在security框架中 用户的唯一身份 不能重复
+     * <p>
+     * 微信小程序
      *
      * @return
      */
@@ -77,6 +83,7 @@ public class SecurityUser implements UserDetails {
 
 
     public void setPerms(Set<String> perms) {
+        // 处理，
         HashSet<String> finalSet = new HashSet<>();
         perms.forEach(perm -> {
             if (perm.contains(",")) {

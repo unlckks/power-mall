@@ -19,4 +19,6 @@ public interface ProdTagService extends IService<ProdTag>{
 
     List<ProdTag> loadProdTags();
 
+    List<ProdTag> prodTagMallList();
+
 }

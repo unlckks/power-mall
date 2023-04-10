@@ -49,10 +49,22 @@
         SELECT prod_id as prodId, count(prod_id) as allCount, count(case evaluate when 0 then 1 end) as goodCount
         FROM `prod_comm`
         where `status` = 1
-          and prod_id in
+        and prod_id in
         <foreach collection="prodIds" item="prodId" open="(" close=")" separator=",">
             #{prodId}
         </foreach>
         GROUP BY prod_id;
+    </select>
+
+    <select id="selectCommOverview" resultType="com.mingyun.model.CommOverview">
+        SELECT
+            prod_id as prodId,
+            count(prod_id) as allCount,
+            count(case when evaluate = 0 then 1 end) as goodCount,
+            count(case when evaluate = 1 then 1 end) as secondCount,
+            count(case when evaluate = 2 then 1 end) as badCount
+        FROM `prod_comm` where prod_id = #{value} and `status` = 1
+
+
     </select>
 </mapper>

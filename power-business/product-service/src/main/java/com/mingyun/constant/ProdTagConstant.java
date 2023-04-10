@@ -7,4 +7,8 @@ package com.mingyun.constant;
 public interface ProdTagConstant {
 
     String PROD_TAG_LIST = "'prodTagList'";
+
+
+    String PROD_TAG_MALL_LIST = "'prodTagMallList'";
+
 }

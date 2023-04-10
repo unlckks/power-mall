@@ -56,4 +56,17 @@ public class ProdTagServiceImpl extends ServiceImpl<ProdTagMapper, ProdTag> impl
                 .orderByDesc(ProdTag::getSeq)
         );
     }
+
+    /**
+     *进行查询商城首页的活动标签
+     * @return
+     */
+    @Override
+    @Cacheable(key = ProdTagConstant.PROD_TAG_MALL_LIST)
+    public List<ProdTag> prodTagMallList() {
+        return prodTagMapper.selectList(new LambdaQueryWrapper<ProdTag>()
+                .select(ProdTag::getId,ProdTag::getTitle,ProdTag::getStyle)
+                .eq(ProdTag::getStatus,1)
+                .orderByDesc(ProdTag::getSeq));
+    }
 }

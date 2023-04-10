@@ -1,6 +1,7 @@
 package com.mingyun.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.mingyun.domain.Prod;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

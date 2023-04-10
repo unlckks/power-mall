@@ -22,6 +22,10 @@ public class AuthUtil {
         return getLoginUser().getShopId();
     }
 
+    public static String getOpenId() {
+        return getLoginUser().getOpenId();
+    }
+
     public static Set<String> getPerms() {
         return getLoginUser().getPerms();
     }

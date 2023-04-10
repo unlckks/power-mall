@@ -42,4 +42,18 @@ public class ProdTagController {
         List<ProdTag> prodTags = prodTagService.loadProdTags();
         return Result.success(prodTags);
     }
+
+    /**
+     *
+     * wx mall
+     * @return
+     */
+    @GetMapping("prodTagList")
+    @ApiOperation("查询商城首页的活动标签列表")
+    public Result<List<ProdTag>> prodTagMallList() {
+        List<ProdTag> prodTags = prodTagService.prodTagMallList();
+        return Result.success(prodTags);
+    }
+
+
 }

@@ -19,5 +19,9 @@ spring:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   profiles:
     active: dev
-
+wx:
+  auth:
+    app-id: wx0e9edb8c9d43eeff
+    app-secret: wx0e9edb8c9d43eeff
+    url: https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code
 
