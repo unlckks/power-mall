@@ -19,11 +19,5 @@ spring:
                     - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
     profiles:
         active: dev
-    elasticsearch:
-        uris: http://192.168.158.129/:9200
-    task:
-      scheduling:
-        pool:
-            size: 4
 esimport:
     flag: false

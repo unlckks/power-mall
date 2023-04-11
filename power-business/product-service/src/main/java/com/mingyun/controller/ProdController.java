@@ -51,7 +51,7 @@ public class ProdController {
         return Result.handle(i > 0);
     }
 
-    ////////////////////// feign /////////////////
+            //feign
 
     @GetMapping("getProdById")
     @ApiOperation("根据商品id查询商品信息")
@@ -60,7 +60,7 @@ public class ProdController {
         return Result.success(prod);
     }
 
-    //////////////// mall ////////////////
+    //mall
     @GetMapping("prod/prodInfo")
     @ApiOperation("根据商品id查询商品和sku集合信息")
     public Result<ProdSkuVO> getProdAndSkus(Long prodId) {

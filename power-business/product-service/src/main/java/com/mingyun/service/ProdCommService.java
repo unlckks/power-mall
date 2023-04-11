@@ -1,8 +1,11 @@
 package com.mingyun.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mingyun.domain.ProdComm;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.mingyun.dto.PageDTO;
 import com.mingyun.vo.ProdCommOverviewVO;
+import com.mingyun.vo.ProdCommVO;
 
 /**
  *  @Author: MingYun
@@ -16,4 +19,14 @@ public interface ProdCommService extends IService<ProdComm>{
      * @return
      */
         ProdCommOverviewVO prodCommOverView(Long prodId);
-    }
+
+    /**
+     * 分页查询
+     * @param prodId
+     * @param evaluate
+     * @param pageDTO
+     * @return
+     */
+    Page<ProdCommVO> prodCommMallPage(Long prodId, Integer evaluate, PageDTO pageDTO);
+
+}

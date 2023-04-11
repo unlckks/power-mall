@@ -34,6 +34,9 @@
         <common-base.version>1.0.0</common-base.version>
         <common-business.version>1.0.0</common-business.version>
         <qiniu.version>[7.7.0, 7.10.99]</qiniu.version>
+        <es-common.version>1.0.0</es-common.version>
+        <rocketmq.version>2.2.2</rocketmq.version>
+        <ali-sms.version>2.0.23</ali-sms.version>
     </properties>
 
     <dependencies>
@@ -47,6 +50,19 @@
     <!--全局依赖管理-->
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>dysmsapi20170525</artifactId>
+                <version>${ali-sms.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.mingyun</groupId>

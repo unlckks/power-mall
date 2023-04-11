@@ -72,10 +72,9 @@ public class MemberLoginStrategy implements LoginStrategy {
         securityUser.setLoginType(AuthConstant.MEMBER_LOGIN);
         securityUser.setUsername(openId);
         securityUser.setOpenId(openId);
-        securityUser.setPassword("$2a$10$BeeAikeHdJTRf67HQnZqE..2Un7IHJ0S/gD.q30rRqGAagiYu4XdG");
+        securityUser.setPassword("$2a$10$ZuNSrJ0vrevLil2oCb0LeuI7ALWo5MdmzlbQcmShzimgqpjVzl8c.");
         return securityUser ;
     }
-
     /**
      * 进行注册
      *
@@ -98,7 +97,6 @@ public class MemberLoginStrategy implements LoginStrategy {
         loginMember.setUserLastip(request.getRemoteAddr());
         loginMemberMapper.insert(loginMember);
         return loginMember;
-
     }
     public static void main(String[] args) {
         System.out.println(new BCryptPasswordEncoder().encode("WECHAT"));

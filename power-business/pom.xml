@@ -18,6 +18,8 @@
         <module>search-service</module>
         <module>store-service</module>
         <module>member-service</module>
+        <module>msg-service</module>
+        <module>cart-service</module>
     </modules>
 
     <properties>
