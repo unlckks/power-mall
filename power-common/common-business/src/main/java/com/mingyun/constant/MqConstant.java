@@ -1,8 +1,8 @@
 package com.mingyun.constant;
 
 /**
- * @author: 动力节点·武汉
- * 时间: 2023-04-11 10:43
+ * @Author: MingYun
+ * @Date: 2023-04-11 15:00
  */
 public interface MqConstant {
 
@@ -13,4 +13,7 @@ public interface MqConstant {
 
     String MQ_NAME_SPACE = "power-mall";
 
+    String ORDER_MS_TOPIC = "orderMsTopic";
+
+    String ORDER_MS_CONSUMER_GROUP = "orderMsConsumerGroup";
 }

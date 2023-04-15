@@ -13,6 +13,7 @@ import com.mingyun.utils.AuthUtil;
 import com.mingyun.vo.IndexImgVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,7 @@ import org.springframework.util.ObjectUtils;
  *  @Date: 2023-04-07 19:40
  */
 @Service
+@CacheConfig(cacheNames = "com.mingyun.service.impl.IndexImgServiceImpl")
 public class IndexImgServiceImpl extends ServiceImpl<IndexImgMapper, IndexImg> implements IndexImgService{
 
     @Autowired

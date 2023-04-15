@@ -3,7 +3,8 @@ package com.mingyun.config;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @RefreshScope
 @Component
-@ConfigurationProperties(prefix = "esimport")
 public class EsImportConfig {
-    private Boolean falg;
+    @Value("${esimport.flag}")
+    private Boolean flag;
 }

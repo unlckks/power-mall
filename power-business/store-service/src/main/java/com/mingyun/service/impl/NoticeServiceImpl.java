@@ -3,6 +3,7 @@ package com.mingyun.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.mingyun.constant.NoticeConstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import com.mingyun.service.NoticeService;
  *  @Date: 2023-04-07 19:40
  */
 @Service
+@CacheConfig(cacheNames = "com.mingyun.service.impl.NoticeServiceImpl")
 public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> implements NoticeService{
     @Autowired
     private  NoticeMapper noticeMapper ;

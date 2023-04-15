@@ -1,7 +1,6 @@
 package com.mingyun.uitls;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;

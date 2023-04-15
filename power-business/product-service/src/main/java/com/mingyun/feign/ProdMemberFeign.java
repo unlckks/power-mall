@@ -16,6 +16,9 @@ import java.util.Set;
 @FeignClient(value = "member-service")
 public interface ProdMemberFeign {
 
+
     @GetMapping("p/user/getMembersByOpenIds")
     Result<List<Member>> getMembersByOpenIds(@RequestParam("openIds")Set<String> openIds);
+
+
 }

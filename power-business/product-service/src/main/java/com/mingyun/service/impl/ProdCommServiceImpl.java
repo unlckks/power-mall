@@ -43,7 +43,7 @@ public class ProdCommServiceImpl extends ServiceImpl<ProdCommMapper, ProdComm> i
     @Autowired
     private ProdCommMapper prodCommMapper ;
 
-    @Resource
+    @Autowired
     private ProdMemberFeign prodMemberFeign;
 
     /**
@@ -55,22 +55,23 @@ public class ProdCommServiceImpl extends ServiceImpl<ProdCommMapper, ProdComm> i
     public ProdCommOverviewVO prodCommOverView(Long prodId) {
         ProdCommOverviewVO prodCommOverviewVO = new ProdCommOverviewVO();
         CommOverview commOverview = prodCommMapper.selectCommOverview(prodId);
-        if(ObjectUtils.isEmpty(commOverview)||commOverview.getAllCount().equals(0L)){
+        if (ObjectUtils.isEmpty(commOverview) || commOverview.getAllCount().equals(0L)) {
             return prodCommOverviewVO;
         }
-        BeanUtils.copyProperties(commOverview ,prodCommOverviewVO);
-        if (! commOverview.getGoodCount().equals(0L)){
+        BeanUtils.copyProperties(commOverview, prodCommOverviewVO);
+        if (!commOverview.getGoodCount().equals(0L)) {
             BigDecimal goodLv = new BigDecimal(commOverview.getGoodCount().toString())
                     .divide(new BigDecimal(commOverview.getAllCount().toString()),
                             2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal("100"));
             prodCommOverviewVO.setGoodLv(goodLv);
         }
-        Long picCount =prodCommMapper.selectCount(new LambdaQueryWrapper<ProdComm>()
-                .eq(ProdComm::getProdId,prodId)
-                .eq(ProdComm::getStatus,1)
-                .isNotNull(ProdComm::getPics));
+        Long picCount = prodCommMapper.selectCount(new LambdaQueryWrapper<ProdComm>()
+                .eq(ProdComm::getProdId, prodId)
+                .eq(ProdComm::getStatus, 1)
+                .isNotNull(ProdComm::getPics)
+        );
         prodCommOverviewVO.setPicCount(picCount);
-        return prodCommOverviewVO ;
+        return prodCommOverviewVO;
     }
 
     /**
@@ -84,37 +85,38 @@ public class ProdCommServiceImpl extends ServiceImpl<ProdCommMapper, ProdComm> i
     public Page<ProdCommVO> prodCommMallPage(Long prodId, Integer evaluate, PageDTO pageDTO) {
         Page<ProdComm> page = new Page<>(pageDTO.getCurrent(), pageDTO.getSize());
         Page<ProdCommVO> prodCommVOPage = new Page<>(pageDTO.getCurrent(), pageDTO.getSize());
-        Page<ProdComm> prodCommPage =  prodCommMapper.selectPage(page ,new LambdaQueryWrapper<ProdComm>()
-                .eq(ProdComm::getProdId,prodId)
-                .eq(ProdComm::getStatus,1)
-                .eq(!evaluate.equals(-1)&&!evaluate.equals(3),ProdComm::getEvaluate ,evaluate)
-                .isNotNull(evaluate.equals(3),ProdComm::getPics)
-                .orderByDesc(ProdComm::getScore ,ProdComm::getCreateTime)
+        Page<ProdComm> prodCommPage = prodCommMapper.selectPage(page, new LambdaQueryWrapper<ProdComm>()
+                .eq(ProdComm::getProdId, prodId)
+                .eq(ProdComm::getStatus, 1)
+                .eq(!evaluate.equals(-1) && !evaluate.equals(3), ProdComm::getEvaluate, evaluate)
+                .isNotNull(evaluate.equals(3), ProdComm::getPics)
+                .orderByDesc(ProdComm::getScore, ProdComm::getCreateTime)
         );
         List<ProdComm> prodCommList = prodCommPage.getRecords();
         if (CollectionUtils.isEmpty(prodCommList)) {
             return prodCommVOPage;
         }
-        //进行拿会员的信息
-        Set<String> openIds =prodCommList.stream()
+        // 拿会员的信息
+        Set<String> openIds = prodCommList.stream()
                 .map(ProdComm::getOpenId)
                 .collect(Collectors.toSet());
-        //进行远程调用
+        // 远程调用
         Result<List<Member>> result = prodMemberFeign.getMembersByOpenIds(openIds);
-        if (result.getCode().equals(BusinessEnum.OPERATION_FAIL.getCode())){
-            throw  new BusinessException(result.getMsg());
+        if (result.getCode().equals(BusinessEnum.OPERATION_FAIL.getCode())) {
+            throw new BusinessException(result.getMsg());
         }
         List<Member> memberList = result.getData();
-    Map<String,Member>memberMap = memberList.stream()
-            .collect(Collectors.toMap(Member::getOpenId, m->m));
-        List<ProdCommVO> prodCommVOS =new ArrayList<>(prodCommList.size());
-        //进行组装数据
+        Map<String, Member> memberMap = memberList.stream()
+                .collect(Collectors.toMap(Member::getOpenId, m -> m));
+        // 组装数据
+        List<ProdCommVO> prodCommVOS = new ArrayList<>(prodCommList.size());
         prodCommList.forEach(prodComm -> {
             ProdCommVO prodCommVO = new ProdCommVO();
-            BeanUtils.copyProperties(prodComm,prodCommVO);
+            BeanUtils.copyProperties(prodComm, prodCommVO);
             Member member = memberMap.get(prodComm.getOpenId());
             prodCommVO.setPic(member.getPic());
-            String decode =null ;
+            // 昵称需要做一个转码
+            String decode = null;
             try {
                 decode = URLDecoder.decode(member.getNickName(), HttpConstant.UTF_8);
             } catch (UnsupportedEncodingException e) {
@@ -125,7 +127,8 @@ public class ProdCommServiceImpl extends ServiceImpl<ProdCommMapper, ProdComm> i
         });
         prodCommVOPage.setRecords(prodCommVOS);
         prodCommVOPage.setTotal(prodCommPage.getTotal());
-        return  prodCommVOPage ;
-        }
+        return prodCommVOPage;
+    }
+
     }
 

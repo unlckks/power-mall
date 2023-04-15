@@ -5,7 +5,12 @@ package com.mingyun.service;
  * @Date: 2023-04-07 09:55
  */
 public interface ImportService {
+
+
     void importAll();
 
+
     void importUpdate();
+
 }
+

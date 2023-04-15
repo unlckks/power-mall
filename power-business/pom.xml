@@ -20,6 +20,7 @@
         <module>member-service</module>
         <module>msg-service</module>
         <module>cart-service</module>
+        <module>order-service</module>
     </modules>
 
     <properties>

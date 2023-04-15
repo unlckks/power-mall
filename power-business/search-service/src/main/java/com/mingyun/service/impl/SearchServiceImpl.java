@@ -25,7 +25,6 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.Highlighter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -62,7 +61,7 @@ public class SearchServiceImpl implements SearchService {
         searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse = null;
         try {
-            restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+            searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -124,12 +123,12 @@ public class SearchServiceImpl implements SearchService {
             ProdEs prodEs = JSON.parseObject(prodEsStr, ProdEs.class);
             //拿高亮数据
             HighlightField highlightField = hit.getHighlightFields().get("prodName");
-          Text[] fragments = highlightField.fragments();
-            StringBuffer sb =new StringBuffer();
+            Text[] fragments = highlightField.fragments();
+            StringBuffer sb = new StringBuffer();
             for (Text fragment : fragments) {
-                sb.append(fragments.toString());
+                sb.append(fragment.toString());
             }
-          prodEs.setProdName(sb.toString());
+            prodEs.setProdName(sb.toString());
             prodEsArrayList.add(prodEs);
         }
         prodEsPage.setTotal(totalCount);
@@ -138,7 +137,6 @@ public class SearchServiceImpl implements SearchService {
     }
 
     private SortBuilder<?> mySort(Integer sort) {
-
         switch (sort) {
             case 0:
                 // 综合
