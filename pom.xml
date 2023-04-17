@@ -111,7 +111,7 @@
             </dependency>
 
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>common-base</artifactId>
                 <version>${common-base.version}</version>
             </dependency>

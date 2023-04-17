@@ -283,7 +283,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     public Map<String, String> orderSubmit(OrderSubmitDTO orderSubmitDTO) {
         //进行初始化加载
-        OrderSubmitContext orderSubmitContext =     createOrderSubmitContext(orderSubmitDTO);
+        OrderSubmitContext orderSubmitContext =   createOrderSubmitContext(orderSubmitDTO);
         //进行清空购物车
         clearCart(orderSubmitContext);
         //扣减库存
