@@ -2,7 +2,7 @@
 
 ## Project Description
 
-A Spring Cloud, Nacos, Seata, Mysql, Redis, RocketMQ, ElasticSearch, microservices based e-commerce mall system , using mainstream Internet technology architecture services registration and discovery as well as having a complete order process etc.
+A Spring Cloud, Nacos, Seata, Mysql, Redis, RocketMQ, ElasticSearch, microservices based  mall system , using mainstream Internet technology architecture services registration and discovery as well as having a complete order process etc.
 The code is completely open source, without any secondary packaging.
 it is a very suitable secondary development of e-commerce platform system.
 
